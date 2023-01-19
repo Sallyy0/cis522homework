@@ -45,8 +45,6 @@ class GradientDescentLinearRegression(LinearRegression):
             y_pred = X.dot(self.w) + self.b
             dW = (-2 / len(X)) * sum(X.dot((y - y_pred)))
             db = (-1 / len(X)) * sum(y - y_pred)
-            # dW = -(2 * (X.T).dot(y - initial_y)) / len(X)
-            # db = -1 * np.sum(self.Y - initial_y) / len(X)
             self.w = self.w - lr * dW
             self.b = self.b - lr * db
 
