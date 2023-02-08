@@ -1,7 +1,8 @@
 from typing import Callable
+import torch
 
 
-class MLP:
+class MLP(torch.nn.Module):
     def __init__(
         self,
         input_size: int,
@@ -21,7 +22,11 @@ class MLP:
             activation: The activation function to use in the hidden layer.
             initializer: The initializer to use for the weights.
         """
-        ...
+        super(MLP, self).__init__()
+        self.l1 = torch.nn.Linear(input_size, hidden_size)
+        self.l2 = torch.nn.Linear(hidden_size, 84)
+        self.l3 = torch.nn.Linear(84, num_classes)
+        self.activation = torch.nn.ReLU()
 
     def forward(self, x):
         """
@@ -33,4 +38,7 @@ class MLP:
         Returns:
             The output of the network.
         """
-        ...
+        x = self.activation(self.l1(x))
+        x = self.activation(self.l2(x))
+        x = self.l3(x)
+        return torch.nn.functional.log_softmax(x, dim=1)
