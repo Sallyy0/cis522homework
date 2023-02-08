@@ -5,5 +5,10 @@
             "name": "Siyuan Ding",
             "pennkey": "siyuand"
         }
+    ],
+    "sources": [
+        "https://example.com",
+        "Conversations with TA (include TA's name)",
+        "LLM (include information about the LLM and how it was used)"
     ]
 }
