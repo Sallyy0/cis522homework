@@ -1,8 +1,13 @@
 from typing import Callable
 import torch
+from torch import Tensor
 
 
 class MLP(torch.nn.Module):
+    """
+    creates a MLP
+    """
+
     def __init__(
         self,
         input_size: int,
@@ -26,9 +31,10 @@ class MLP(torch.nn.Module):
         self.l1 = torch.nn.Linear(input_size, hidden_size)
         self.l2 = torch.nn.Linear(hidden_size, 84)
         self.l3 = torch.nn.Linear(84, num_classes)
-        self.activation = torch.nn.ReLU()
+        self.activation = torch.nn.LeakyReLU()
+        self.dropout = torch.nn.Dropout(0.5)
 
-    def forward(self, x):
+    def forward(self, x: Tensor) -> Tensor:
         """
         Forward pass of the network.
 
