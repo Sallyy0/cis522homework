@@ -50,6 +50,6 @@ class CustomLRScheduler(_LRScheduler):
         # ]
         return [
             0.001
-            + (base_lr - 0.001) * (1 + math.cos(math.pi * self.last_epoch / 500)) / 2
+            + (base_lr - 0.001) * (1 + math.cos(math.pi * self.last_epoch / 512)) / 2
             for base_lr in self.base_lrs
         ]
