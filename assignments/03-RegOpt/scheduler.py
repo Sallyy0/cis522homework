@@ -2,7 +2,7 @@ from typing import List
 
 from torch.optim.lr_scheduler import _LRScheduler
 
-import torch.optim.lr_scheduler
+# import torch.optim.lr_scheduler
 import math
 
 
@@ -39,9 +39,9 @@ class CustomLRScheduler(_LRScheduler):
         # return [group["lr"] * self.gamma for group in self.optimizer.param_groups]
         # print(self.base_lrs)
         learning_rate = 0.1
-        decay_rate = learning_rate / (self.last_epoch + 1)
+        # decay_rate = learning_rate / (self.last_epoch + 1)
 
         return [
-            base_lr * (1 + math.cos(math.pi * self.last_epoch / 2)) / 2
+            base_lr * (1 + math.cos(math.pi * (self.last_epoch + 1) / 2)) / 2
             for base_lr in self.base_lrs
         ]
