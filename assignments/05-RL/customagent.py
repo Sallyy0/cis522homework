@@ -3,16 +3,9 @@ import numpy as np
 
 
 class Agent:
-    """
-    Agent Class for creating the Agent
-    """
-
     def __init__(
         self, action_space: gym.spaces.Discrete, observation_space: gym.spaces.Box
     ):
-        """
-        function that creates an intial Agent object
-        """
         self.action_space = action_space
         self.observation_space = observation_space
         self.bins = [
@@ -25,15 +18,9 @@ class Agent:
         self.epsilon = 0.01
 
     def discretize(self, observation):
-        """
-        return discrete observations and bins
-        """
         return tuple(np.digitize(obs, bin) for obs, bin in zip(observation, self.bins))
 
     def act(self, observation: gym.spaces.Box) -> gym.spaces.Discrete:
-        """
-        find the proper action under the policy
-        """
         discrete_obs = self.discretize(observation)
         if np.random.uniform(0, 1) < self.epsilon:
             return self.action_space.sample()
@@ -46,9 +33,6 @@ class Agent:
         terminated: bool,
         truncated: bool,
     ) -> None:
-        """
-        update the policy
-        """
         discrete_obs = self.discretize(observation)
         if terminated or truncated:
             self.q_table[discrete_obs] = reward
